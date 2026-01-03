@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatSphere Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #5a60f1, #8b92ff);
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            width: 360px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #5a60f1;
+            font-weight: 700;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            margin-top: 6px;
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #5a60f1;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .note {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .note a {
+            color: #5a60f1;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-box">
+    <div class="logo">
+        <h1>Abhay's World</h1>
+        <p style="color:#666;font-size:14px;">Welcome back!</p>
+    </div>
+
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter your username">
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+    </div>
+
+    <button class="login-btn" id="loginBtn">Login</button>
+
+    <div class="note">
+        New user? <a href="create-account.html">Create Account</a>
+    </div>
+</div>
+
+<script>
+    document.getElementById("loginBtn").onclick = function () {
+
+        let username = document.getElementById("username").value.trim();
+        let password = document.getElementById("password").value.trim();
+
+        if (!username || !password) {
+            alert("Please fill all fields");
+            return;
+        }
+
+        fetch("http://localhost:8080/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(res => res.text())
+        .then(token => {
+
+        if (token && token.startsWith("ey")) {
+            localStorage.setItem("jwtToken", token);
+            window.location.href = "chat.html";
+        } else {
+            alert(token || "Login failed");
+        }
+    })
+
+        .catch(() => {
+            alert("Server error");
+        });
+    };
+</script>
+
+</body>
+</html>
