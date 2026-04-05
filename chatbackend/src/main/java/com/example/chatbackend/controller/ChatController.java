@@ -19,8 +19,6 @@ public class ChatController {
 
         System.out.println("BACKEND HIT: " + message.getContent());
 
-        repository.save(message);
-
-        return message;
+        return repository.save(message);
     }
 }

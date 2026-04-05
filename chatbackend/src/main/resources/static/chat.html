@@ -27,6 +27,7 @@
             box-shadow: 0 8px 40px rgba(0,0,0,0.15);
         }
 
+        /* ================= SIDEBAR ================= */
         .sidebar {
             width: 28%;
             background: #f7f8fa;
@@ -53,6 +54,15 @@
             padding: 15px 20px;
             border-bottom: 1px solid #eee;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
         }
 
         .contact:hover {
@@ -65,6 +75,7 @@
             font-weight: 600;
         }
 
+        /* ================= CHAT AREA ================= */
         .chat-area {
             width: 72%;
             display: flex;
@@ -88,16 +99,20 @@
             border: 2px solid white;
         }
 
+        /* CHAT BOX */
         .chat-box {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* MESSAGE BUBBLES ONLY */
         .message {
             max-width: 65%;
             padding: 12px 15px;
-            margin: 12px 0;
+            margin: 8px 0;
             border-radius: 14px;
             font-size: 15px;
         }
@@ -137,7 +152,6 @@
         }
     </style>
 
-    <!-- WebSocket libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
@@ -149,14 +163,29 @@
     <!-- SIDEBAR -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <img src="images/image.png" alt="Group">
+            <img src="images/image.png" alt="default.jpg">
             <h2>Family Time</h2>
         </div>
 
-        <div class="contact" onclick="openChat('akshay', this)">Akshay Singh</div>
-        <div class="contact" onclick="openChat('prem', this)">Prem Singh</div>
-        <div class="contact" onclick="openChat('roshan', this)">Roshan</div>
-        <div class="contact" onclick="openChat('rakesh', this)">Rakesh</div>
+        <div class="contact" onclick="openChat('akshay', this)">
+            <img src="images/akshay.jpg" onerror="this.src='images/default.jpg'">
+            <span>Akshay Singh</span>
+        </div>
+
+        <div class="contact" onclick="openChat('prem', this)">
+            <img src="images/prem.jpg" onerror="this.src='images/default.jpg'">
+            <span>Prem Singh</span>
+        </div>
+
+        <div class="contact" onclick="openChat('roshan', this)">
+            <img src="images/roshan.jpg" onerror="this.src='images/default.jpg'">
+            <span>Roshan</span>
+        </div>
+
+        <div class="contact" onclick="openChat('rakesh', this)">
+            <img src="images/rakesh.jpg" onerror="this.src='images/default.jpg'">
+            <span>Rakesh</span>
+        </div>
     </div>
 
     <!-- CHAT AREA -->
